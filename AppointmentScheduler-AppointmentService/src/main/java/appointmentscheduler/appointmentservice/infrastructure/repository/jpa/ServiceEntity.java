@@ -16,7 +16,6 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Embeddable
 @Table(name = "service")
 public class ServiceEntity implements DomainTranslatable<Service> {
 
@@ -33,7 +32,7 @@ public class ServiceEntity implements DomainTranslatable<Service> {
     @Column(name = "duration")
     private int duration;
 
-    @OneToMany(mappedBy = "service")
+    @OneToMany(mappedBy = "service", fetch = FetchType.LAZY)
     private Set<Appointment> appointments = new HashSet<>();
 
     @Override
@@ -52,6 +51,7 @@ public class ServiceEntity implements DomainTranslatable<Service> {
         }
 
         return ServiceEntity.builder()
+                .id(service.getId())
                 .name(service.getName())
                 .description(service.getDescription())
                 .duration(service.getDuration())

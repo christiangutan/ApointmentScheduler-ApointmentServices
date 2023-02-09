@@ -27,10 +27,11 @@ public class AppointmentEntity implements DomainTranslatable<Appointment> {
     private String description;
 
     @Column(name = "date")
-    private LocalDateTime date;     //Puede que dé problemas en la DDBB
+    private LocalDateTime date;     //Puede que el la clase LocalDateTime dé problemas en la DDBB ?
 
     @ManyToOne
-    private Service service;
+//    @JoinColumn(name = "id_service", referencedColumnName = "id")
+    private ServiceEntity service;
 
     @Override
     public Appointment toDomain() {
@@ -38,7 +39,8 @@ public class AppointmentEntity implements DomainTranslatable<Appointment> {
                 .id(id)
                 .description(description)
                 .date(date)
-                .service(service).build();
+                .service(service.toDomain())
+                .build();
     }
 
     public static AppointmentEntity fromDomain(Appointment appointment) {
@@ -47,9 +49,10 @@ public class AppointmentEntity implements DomainTranslatable<Appointment> {
         }
 
         return AppointmentEntity.builder()
+                .id(appointment.getId())
                 .description(appointment.getDescription())
                 .date(appointment.getDate())
-                .service(ServiceEntity.fromDomain(appointment).getService())
+                .service(ServiceEntity.fromDomain(appointment.getService()))
                 .build();
     }
 }
