@@ -30,7 +30,7 @@ public class AppointmentEntity implements DomainTranslatable<Appointment> {
     private LocalDateTime date;     //Puede que el la clase LocalDateTime dé problemas en la DDBB ?
 
     @ManyToOne
-//    @JoinColumn(name = "id_service", referencedColumnName = "id")
+    //@JoinColumn(name = "id_service", referencedColumnName = "id")
     private ServiceEntity service;
 
     @Override

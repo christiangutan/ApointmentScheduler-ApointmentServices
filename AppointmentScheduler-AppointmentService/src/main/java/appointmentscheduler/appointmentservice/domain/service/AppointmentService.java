@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface AppointmentService {
     List<Appointment> getAppointments();
 
-    Long createAppointment(Appointment appointment);
-
     Optional<Appointment> getAppointmentById(Long id);
+
+    Long createAppointment(Appointment appointment);
 }

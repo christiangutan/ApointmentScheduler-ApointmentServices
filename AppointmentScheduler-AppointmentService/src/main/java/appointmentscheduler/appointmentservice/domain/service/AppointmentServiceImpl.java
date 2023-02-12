@@ -25,6 +25,12 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
+    public Optional<Appointment> getAppointmentById(Long id) {
+        return appointmentRepository.getAppointmentById(id);
+
+    }
+
+    @Override
     public Long createAppointment(Appointment appointment) {
         Long id = null;
         Optional<Service> optService = serviceRepository.getServiceById(appointment.getService().getId());
@@ -41,9 +47,4 @@ public class AppointmentServiceImpl implements AppointmentService{
         return id;
     }
 
-    @Override
-    public Optional<Appointment> getAppointmentById(Long id) {
-        return appointmentRepository.getAppointmentById(id);
-
-    }
 }

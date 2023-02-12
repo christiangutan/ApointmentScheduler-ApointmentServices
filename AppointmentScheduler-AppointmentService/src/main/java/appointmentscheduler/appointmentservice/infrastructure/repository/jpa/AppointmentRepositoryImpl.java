@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class AppointmentRepositoryImpl implements AppointmentRepository{
 
     private final SpringDataAppointmentRepository appointmentJpaRepository;
-    private final SpringDataAppointmentRepository serviceJpaRepository;
+    private final SpringDataServiceRepository serviceJpaRepository;
 
     @Override
     public List<Appointment> getAppointments() {
@@ -36,7 +36,7 @@ public class AppointmentRepositoryImpl implements AppointmentRepository{
     @Override
     public Long createAppointment(Appointment appointment) {
         AppointmentEntity appointmentEntity = AppointmentEntity.fromDomain(appointment);
-        appointmentEntity.setService(serviceJpaRepository.getServiceById(appointment.getService().getId()));
+        appointmentEntity.setService(serviceJpaRepository.getById(appointment.getService().getId()));
         return appointmentJpaRepository.save(appointmentEntity).getId();
     }
 }

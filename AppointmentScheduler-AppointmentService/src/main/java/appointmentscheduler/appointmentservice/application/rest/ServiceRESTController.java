@@ -1,5 +1,7 @@
 package appointmentscheduler.appointmentservice.application.rest;
 
+import appointmentscheduler.appointmentservice.application.request.CreateAppointmentRequest;
+import appointmentscheduler.appointmentservice.application.request.CreateServiceRequest;
 import appointmentscheduler.appointmentservice.domain.Service;
 import appointmentscheduler.appointmentservice.domain.service.AppointmentService;
 import appointmentscheduler.appointmentservice.domain.service.ServiceService;
@@ -8,11 +10,10 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @Log4j2
@@ -29,10 +30,27 @@ public class ServiceRESTController {
         return serviceService.getServices();
     }
 
-    @GetMapping"/services/{id}"
+    @GetMapping("/services/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Service> getServiceById(@PathVariable Long id) {
         log.trace("getServiceById");
-        return serviceService.getServiceById(id);
+        return serviceService
+                .getServiceById(id)
+                .map(service -> ResponseEntity.ok().body(service))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/services")
+    public ResponseEntity<Long> createAppointment(@RequestBody CreateServiceRequest createServiceRequest) {
+
+        log.trace("createService");
+        Long id = serviceService.createService(createServiceRequest.getService());
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(id)
+                .toUri();
+
+        return ResponseEntity.created(uri).body(id);
     }
 }

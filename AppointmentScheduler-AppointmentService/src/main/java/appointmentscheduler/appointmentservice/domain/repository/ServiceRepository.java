@@ -10,4 +10,6 @@ public interface ServiceRepository {
     List<Service> getServices();
     Optional<Service> getServiceById(Long id);
 
+    Long createService(Service service);
+
 }

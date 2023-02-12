@@ -25,4 +25,10 @@ public class ServiceRepositoryImpl implements ServiceRepository {
     public Optional<Service> getServiceById(Long id) {
         return serviceJpaRepository.findById(id).map(ServiceEntity::toDomain);
     }
+
+    @Override
+    public Long createService(Service service) {
+        ServiceEntity serviceEntity = ServiceEntity.fromDomain(service);
+        return serviceJpaRepository.save(serviceEntity).getId();
+    }
 }
