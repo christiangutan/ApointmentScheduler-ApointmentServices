@@ -18,7 +18,7 @@ public class AppointmentServiceApplication {
         SpringApplication.run(AppointmentServiceApplication.class, args);
     }
 
-    @Bean
+    /*@Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
@@ -28,5 +28,5 @@ public class AppointmentServiceApplication {
 
             }
         };
-    }
+    }*/
 }

@@ -33,7 +33,7 @@ public class ServiceEntity implements DomainTranslatable<Service> {
     private int duration;
 
     @OneToMany(mappedBy = "service", fetch = FetchType.LAZY)
-    private Set<Appointment> appointments = new HashSet<>();
+    private Set<AppointmentEntity> appointments = new HashSet<>();
 
     @Override
     public Service toDomain() {
