@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AppointmentScheduler-AppointmentService/AppointmentScheduler-AppointmentService.iml" filepath="$PROJECT_DIR$/AppointmentScheduler-AppointmentService/AppointmentScheduler-AppointmentService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AppointmentScheduler-AppointmentService/appointmentScheduler.iml" filepath="$PROJECT_DIR$/AppointmentScheduler-AppointmentService/appointmentScheduler.iml" />
     </modules>
   </component>
 </project>
